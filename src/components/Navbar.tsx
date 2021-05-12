@@ -88,13 +88,17 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
               display={{ lg: "block", base: "none" }}
               as="img"
               height="4rem"
+              width="20rem"
               src={logo.text.file.url}
+              alt="Betsy Rader Law LLC"
             />
             <Box
               display={{ lg: "none", base: "block" }}
               as="img"
               height="4rem"
+              width="4rem"
               src={logo.square.file.url}
+              alt="Betsy Rader Law LLC"
             />
           </Box>
           <HStack spacing="3rem" ml="auto">

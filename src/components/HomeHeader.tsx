@@ -3,7 +3,7 @@ import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
-import Navbar, { NavbarLink } from "./Navbar";
+import Navbar from "./Navbar";
 
 const ImageTint = styled(Box)({
   position: "relative",
@@ -27,13 +27,13 @@ const HomeHeader: FC = () => {
         file: { fileName: { eq: "header-skyline.jpeg" } }
       ) {
         id
-        fluid(resizingBehavior: FILL, cropFocus: TOP, quality: 100, maxWidth: 2048) {
+        fluid(resizingBehavior: FILL, cropFocus: TOP, maxWidth: 2048, toFormat: WEBP) {
           ...GatsbyContentfulFluid
         }
       }
       headshot: contentfulAsset(file: { fileName: { eq: "betsyrader.png" } }) {
         id
-        fluid(quality: 100) {
+        fluid(toFormat: WEBP, quality: 90) {
           ...GatsbyContentfulFluid
         }
       }

@@ -15,10 +15,9 @@ const SEO: FC<SEOProps> = ({ title, description, image, article }) => {
   const { site } = useStaticQuery(query);
   const {
     defaultTitle,
-    titleTemplate,
     defaultDescription,
     siteUrl,
-    defaultImage
+    defaultImage,
   } = site.siteMetadata;
 
   const seo = {
@@ -29,7 +28,12 @@ const SEO: FC<SEOProps> = ({ title, description, image, article }) => {
   };
 
   return (
-    <Helmet title={seo.title}>
+    <Helmet
+      title={seo.title}
+      htmlAttributes={{
+        lang: "en-us",
+      }}
+    >
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
       {seo.url && <meta property="og:url" content={seo.url} />}

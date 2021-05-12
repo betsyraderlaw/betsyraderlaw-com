@@ -64,7 +64,7 @@ export const pageQuery = graphql`
         direction
         backgroundColor
         background {
-          fluid(quality: 100) {
+          fluid(maxWidth: 2048, toFormat: WEBP) {
             ...GatsbyContentfulFluid
           }
         }

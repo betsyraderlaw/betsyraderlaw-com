@@ -15,7 +15,7 @@ const PracticeAreas: FC<PracticeAreasProps> = (props) => {
           id
           title
           image {
-            fluid(quality: 100) {
+            fluid(quality: 100, maxWidth: 256, maxHeight: 208, toFormat: WEBP) {
               ...GatsbyContentfulFluid
             }
           }

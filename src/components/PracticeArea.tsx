@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, BoxProps, Heading, VStack, Flex } from "@chakra-ui/react";
+import { BoxProps, Heading, VStack, Flex } from "@chakra-ui/react";
 import Img, { FluidObject } from "gatsby-image";
 
 export type PracticeAreaProps = BoxProps & {

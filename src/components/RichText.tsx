@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { Box, BoxProps, Text, TextProps } from "@chakra-ui/react";
+import { Text, TextProps } from "@chakra-ui/react";
 import {
   documentToReactComponents,
   Options,
 } from "@contentful/rich-text-react-renderer";
-import { Document, BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { Document, BLOCKS } from "@contentful/rich-text-types";
 
 export type RichTextDocument = Document;
 

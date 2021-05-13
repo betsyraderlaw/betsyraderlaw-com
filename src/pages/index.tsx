@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Contact from '../components/Contact';
 import PracticeAreas from '../components/PracticeAreas';
+import Badges from '../components/Badges';
 
 type IndexProps = {
   data: any;
@@ -26,6 +27,7 @@ const Index: FC<IndexProps> = ({ data }) => {
         backgroundImage={data.sections.nodes[0].background.fluid}
         content={JSON.parse(data.sections.nodes[0].content.raw)}
       />
+      <Badges />
       <PracticeAreas />
       <Box>
         {data.sections.nodes

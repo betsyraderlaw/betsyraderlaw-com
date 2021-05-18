@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Flex, Box, BoxProps, Heading, Text, VStack } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import Img from "gatsby-image";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import RichText, { RichTextDocument } from "./RichText";
 
 type ImageTintProps = BoxProps & {
@@ -30,7 +30,7 @@ export type LandingSectionProps = {
   overline?: string;
   title: string;
   direction: "left" | "right";
-  backgroundImage: any;
+  backgroundImage: IGatsbyImageData;
   backgroundColor: "primary" | "secondary";
   content: RichTextDocument;
 };
@@ -52,11 +52,7 @@ const LandingSection: FC<LandingSectionProps> = ({
     >
       <Flex position="relative" maxHeight="24rem" minHeight="18rem" flex={1}>
         <ImageTint tintColor={backgroundColor}>
-          <Img
-            style={{ height: "100%" }}
-            durationFadeIn={1000}
-            fluid={backgroundImage}
-          />
+          <GatsbyImage alt={title} style={{ width: '100%', height: '100%' }} image={backgroundImage} />
         </ImageTint>
         <Flex
           position="absolute"
@@ -96,8 +92,8 @@ const LandingSection: FC<LandingSectionProps> = ({
       >
         <RichText
           maxWidth={{ lg: "32rem", base: "none" }}
-          mr={direction === 'left' ? 'auto' : 0}
-          ml={direction === 'right' ? 'auto' : 0}
+          mr={direction === "left" ? "auto" : 0}
+          ml={direction === "right" ? "auto" : 0}
           content={content}
           fontWeight="medium"
         />

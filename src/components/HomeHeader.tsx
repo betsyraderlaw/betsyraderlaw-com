@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
 import Navbar from "./Navbar";
 
 const ImageTint = styled(Box)({
   position: "relative",
-  height: '36rem',
+  height: "36rem",
   ":after": {
     content: '""',
     display: "block",
@@ -27,15 +27,22 @@ const HomeHeader: FC = () => {
         file: { fileName: { eq: "header-skyline.jpeg" } }
       ) {
         id
-        fluid(resizingBehavior: FILL, cropFocus: TOP, maxWidth: 2048, toFormat: WEBP) {
-          ...GatsbyContentfulFluid
-        }
+        title
+        gatsbyImageData(
+          resizingBehavior: FILL
+          cropFocus: TOP
+          formats: [AUTO, WEBP]
+        )
       }
       headshot: contentfulAsset(file: { fileName: { eq: "betsyrader.png" } }) {
         id
-        fluid(toFormat: WEBP, quality: 90) {
-          ...GatsbyContentfulFluid
-        }
+        title
+        gatsbyImageData(
+          quality: 100
+          height: 400
+          placeholder: TRACED_SVG
+          formats: [AUTO, WEBP]
+        )
       }
       text: contentfulPageHeader(page: { eq: "/" }) {
         headline
@@ -58,11 +65,11 @@ const HomeHeader: FC = () => {
           zIndex={10}
         />
         <ImageTint>
-          <Img
-            style={{ height: "100%" }}
+          <GatsbyImage
+            style={{ height: "100%", width: "100%" }}
             imgStyle={{ filter: "grayscale(100%)" }}
-            durationFadeIn={1000}
-            fluid={data.header.fluid}
+            alt={data.header.title}
+            image={data.header.gatsbyImageData}
           />
         </ImageTint>
         <Flex
@@ -71,35 +78,43 @@ const HomeHeader: FC = () => {
           left={0}
           right={0}
           top={0}
-          px={{ xl: '10rem', lg: '4rem', base: '1rem' }}
-          alignItems="center"
+          px={{ xl: "10rem", lg: "4rem", base: "1rem" }}
+          alignItems="flex-end"
           justifyContent="center"
         >
-          <VStack maxWidth="45rem" alignItems="left" mt="4rem">
-            <Heading
-              fontWeight="semibold"
-              fontSize={{ xl: "6xl", sm: "5xl", base: "4xl" }}
-              textTransform="uppercase"
-              color="primary"
-              textAlign={{ lg: 'left', base: 'center' }}
+          <Flex maxW="64rem" justifyContent="center" alignItems="bottom">
+            <VStack maxWidth="45rem" alignItems="left" mt="4rem" mb="8rem" flex={1}>
+              <Heading
+                fontWeight="semibold"
+                fontSize={{ xl: "6xl", sm: "5xl", base: "4xl" }}
+                textTransform="uppercase"
+                color="primary"
+                textAlign={{ lg: "left", base: "center" }}
+              >
+                {data.text.headline}
+              </Heading>
+              <Heading
+                fontWeight="medium"
+                fontSize={{ xl: "5xl", sm: "4xl", base: "3xl" }}
+                textAlign={{ lg: "left", base: "center" }}
+              >
+                {data.text.subtitle}
+              </Heading>
+            </VStack>
+            <Box
+              mt="auto"
+              ml="auto"
+              height="400px"
+              width="300px"
+              flexShrink={0}
+              display={{ lg: "block", base: "none" }}
             >
-              {data.text.headline}
-            </Heading>
-            <Heading
-              fontWeight="medium"
-              fontSize={{ xl: "5xl", sm: "4xl", base: "3xl" }}
-              textAlign={{ lg: 'left', base: 'center' }}
-            >
-              {data.text.subtitle}
-            </Heading>
-          </VStack>
-          <Box mt="auto" display={{ lg: 'block', base: 'none' }}>
-            <Img
-              style={{ width: 300, marginLeft: "auto" }}
-              fadeIn={false}
-              fluid={data.headshot.fluid}
-            />
-          </Box>
+              <GatsbyImage
+                alt={data.headshot.title}
+                image={data.headshot.gatsbyImageData}
+              />
+            </Box>
+          </Flex>
         </Flex>
       </Box>
       <Flex bg="primary" py="2rem" justifyContent="center" px="2rem">

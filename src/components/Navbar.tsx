@@ -53,21 +53,29 @@ export type NavbarProps = FlexProps;
 
 const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const logo = useStaticQuery(graphql`
-    query Logo {
-      text: contentfulAsset(file: { fileName: { eq: "logo-text.svg" } }) {
+  const data = useStaticQuery(graphql`
+    query Navbar {
+      textLogo: contentfulAsset(file: { fileName: { eq: "logo-text.svg" } }) {
         file {
           url
         }
       }
-      square: contentfulAsset(file: { fileName: { eq: "logo-square.svg" } }) {
+      squareLogo: contentfulAsset(
+        file: { fileName: { eq: "logo-square.svg" } }
+      ) {
         file {
           url
+        }
+      }
+      pages: allContentfulPage {
+        nodes {
+          id
+          title
+          path
         }
       }
     }
   `);
-
   return (
     <>
       <Flex
@@ -85,7 +93,7 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
               as="img"
               height="4rem"
               width="20rem"
-              src={logo.text.file.url}
+              src={data.textLogo.file.url}
               alt="Betsy Rader Law LLC"
             />
             <Box
@@ -93,7 +101,7 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
               as="img"
               height="4rem"
               width="4rem"
-              src={logo.square.file.url}
+              src={data.squareLogo.file.url}
               alt="Betsy Rader Law LLC"
             />
           </Box>
@@ -101,21 +109,15 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
             <NavbarLink to="/" display={{ md: "block", base: "none" }}>
               Home
             </NavbarLink>
-            <NavbarLink to="/about" display={{ md: "block", base: "none" }}>
-              About
-            </NavbarLink>
-            <NavbarLink
-              to="/consulting"
-              display={{ md: "block", base: "none" }}
-            >
-              Consulting
-            </NavbarLink>
-            <NavbarLink
-              to="/publications"
-              display={{ md: "block", base: "none" }}
-            >
-              Publications
-            </NavbarLink>
+            {data.pages.nodes.map((page: any) => (
+              <NavbarLink
+                key={page.id}
+                to={`/${page.path}`}
+                display={{ md: "block", base: "none" }}
+              >
+                {page.title}
+              </NavbarLink>
+            ))}
             <NavbarLink to="/contact" display={{ md: "block", base: "none" }}>
               Contact
             </NavbarLink>
@@ -136,13 +138,15 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
         <DrawerContent>
           <VStack p="2rem" spacing="3rem" pb="1rem">
             <Box as={Link} to="/">
-              <Box as="img" height="4rem" src={logo.text.file.url} />
+              <Box as="img" height="4rem" src={data.textLogo.file.url} />
             </Box>
             <VStack spacing="2rem">
               <NavbarLink to="/">Home</NavbarLink>
-              <NavbarLink to="/about">About</NavbarLink>
-              <NavbarLink to="/consulting">Consulting</NavbarLink>
-              <NavbarLink to="/publications">Publications</NavbarLink>
+              {data.pages.nodes.map((page: any) => (
+                <NavbarLink key={page.id} to={`/${page.path}`}>
+                  {page.title}
+                </NavbarLink>
+              ))}
               <NavbarLink to="/contact">Contact</NavbarLink>
             </VStack>
             <Button

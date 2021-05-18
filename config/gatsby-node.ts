@@ -1,49 +1,37 @@
-// import { CreatePagesArgs, GatsbyNode } from "gatsby";
-// import path from 'path';
+import { CreatePagesArgs, GatsbyNode } from "gatsby";
+import path from "path";
 
-// type BlogPostsQuery = {
-//   allContentfulBlogPost?: {
-//     edges?: {
-//       node: {
-//         title: string;
-//         slug: string;
-//       }
-//     }[]
-//   }
-// };
+export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
+  const { createPage } = actions;
 
-// export const createPages = async ({ graphql, actions }: CreatePagesArgs) => {
-//   const { createPage } = actions;
+  const pageTemplate = path.resolve("./src/templates/page.tsx");
 
-//   const blogPost = path.resolve("./src/templates/blog-post.tsx");
+  const { data, errors } = await graphql<any>(`
+    query Pages {
+      pages: allContentfulPage {
+        nodes {
+          id
+          title
+          path
+        }
+      }
+    }
+  `);
 
-//   const { data, errors } = await graphql<BlogPostsQuery>(`
-//     query BlogPosts {
-//       allContentfulBlogPost {
-//         edges {
-//           node {
-//             title
-//             slug
-//           }
-//         }
-//       }
-//     }
-//   `);
+  if (errors) {
+    console.error(errors);
+    throw errors;
+  }
 
-//   if (errors) {
-//     console.error(errors);
-//     throw errors;
-//   }
+  const pages = data?.pages?.nodes || [];
 
-//   const posts = data?.allContentfulBlogPost?.edges?.map((edge) => edge.node) || [];
-
-//   for (const post of posts) {
-//     createPage({
-//       path: `/blog/${post.slug}/`,
-//       component: blogPost,
-//       context: {
-//         slug: post.slug,
-//       },
-//     });
-//   }
-// };
+  for (const page of pages) {
+    createPage({
+      path: page.path,
+      component: pageTemplate,
+      context: {
+        id: page.id
+      }
+    });
+  }
+};

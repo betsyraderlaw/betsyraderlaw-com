@@ -15,9 +15,7 @@ const PracticeAreas: FC<PracticeAreasProps> = (props) => {
           id
           title
           image {
-            fluid(quality: 100, maxWidth: 256, maxHeight: 208, toFormat: WEBP) {
-              ...GatsbyContentfulFluid
-            }
+            gatsbyImageData(width: 256, placeholder: BLURRED, formats: [AUTO, WEBP])
           }
         }
       }
@@ -40,7 +38,7 @@ const PracticeAreas: FC<PracticeAreasProps> = (props) => {
             m="3"
             key={practiceArea.id}
             title={practiceArea.title}
-            image={practiceArea.image.fluid}
+            image={practiceArea.image.gatsbyImageData}
           />
         ))}
       </Flex>

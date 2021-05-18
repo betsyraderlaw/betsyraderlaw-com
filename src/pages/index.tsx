@@ -24,7 +24,7 @@ const Index: FC<IndexProps> = ({ data }) => {
         overline={data.sections.nodes[0].overline}
         direction={data.sections.nodes[0].direction}
         backgroundColor={data.sections.nodes[0].backgroundColor}
-        backgroundImage={data.sections.nodes[0].background.fluid}
+        backgroundImage={data.sections.nodes[0].background.gatsbyImageData}
         content={JSON.parse(data.sections.nodes[0].content.raw)}
       />
       <Badges />
@@ -39,7 +39,7 @@ const Index: FC<IndexProps> = ({ data }) => {
               overline={section.overline}
               direction={section.direction}
               backgroundColor={section.backgroundColor}
-              backgroundImage={section.background.fluid}
+              backgroundImage={section.background.gatsbyImageData}
               content={JSON.parse(section.content.raw)}
             />
           ))}
@@ -66,9 +66,7 @@ export const pageQuery = graphql`
         direction
         backgroundColor
         background {
-          fluid(maxWidth: 2048, toFormat: WEBP) {
-            ...GatsbyContentfulFluid
-          }
+          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
     }

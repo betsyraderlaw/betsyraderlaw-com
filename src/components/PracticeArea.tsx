@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { BoxProps, Heading, VStack, Flex } from "@chakra-ui/react";
-import Img, { FluidObject } from "gatsby-image";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 export type PracticeAreaProps = BoxProps & {
   title: string;
-  image: FluidObject;
+  image: IGatsbyImageData;
 };
 
 const PracticeArea: FC<PracticeAreaProps> = ({ title, image, ...props }) => (
@@ -16,7 +16,7 @@ const PracticeArea: FC<PracticeAreaProps> = ({ title, image, ...props }) => (
     spacing="0"
     {...props}
   >
-    <Img style={{ width: "100%", flex: 1 }} fluid={image} />
+    <GatsbyImage style={{ width: "100%", flex: 1 }} alt={title} image={image} />
     <Flex padding="0.75rem">
       <Heading fontWeight="medium" fontSize="xl" textAlign="center">
         {title}

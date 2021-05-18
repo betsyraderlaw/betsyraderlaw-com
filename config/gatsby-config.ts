@@ -50,16 +50,15 @@ module.exports = {
   },
   pathPrefix: "/betsyraderlaw-com",
   plugins: [
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-react-helmet",
     {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
         resetCSS: true,
       },
     },
-    "gatsby-transformer-remark",
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sharp",
     {
       resolve: "gatsby-source-contentful",
       options: contentfulConfig,

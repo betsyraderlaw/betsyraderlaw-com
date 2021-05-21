@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import HomeHeader from "../components/HomeHeader";
 import { graphql } from "gatsby";
 import { Box, Flex } from "@chakra-ui/react";
 import Footer from '../components/Footer';

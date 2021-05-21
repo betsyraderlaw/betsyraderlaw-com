@@ -23,6 +23,7 @@ const Contact: FC<ContactProps> = (props) => {
       py="4rem"
       px="1rem"
       bg="background"
+      id="contact"
       {...props}
     >
       <Heading fontWeight="semibold">Contact</Heading>

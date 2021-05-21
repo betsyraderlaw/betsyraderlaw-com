@@ -20,7 +20,13 @@ const ImageTint = styled(Box)({
   },
 });
 
-const HomeHeader: FC = () => {
+export type HeaderProps = {
+  headline: string;
+  subtitle?: string;
+  header?: string;
+};
+
+const Header: FC<HeaderProps> = ({ header, subtitle, headline }) => {
   const data = useStaticQuery(graphql`
     query HeaderContent {
       header: contentfulAsset(
@@ -43,13 +49,6 @@ const HomeHeader: FC = () => {
           placeholder: TRACED_SVG
           formats: [AUTO, WEBP]
         )
-      }
-      text: contentfulPageHeader(page: { eq: "/" }) {
-        headline
-        subtitle
-      }
-      headline: contentfulHeadline {
-        headline
       }
     }
   `);
@@ -83,23 +82,34 @@ const HomeHeader: FC = () => {
           justifyContent="center"
         >
           <Flex maxW="64rem" justifyContent="center" alignItems="bottom">
-            <VStack maxWidth="45rem" alignItems="left" mt="4rem" mb="8rem" flex={1}>
-              <Heading
-                fontWeight="semibold"
-                fontSize={{ xl: "6xl", sm: "5xl", base: "4xl" }}
-                textTransform="uppercase"
-                color="primary"
-                textAlign={{ lg: "left", base: "center" }}
-              >
-                {data.text.headline}
-              </Heading>
-              <Heading
-                fontWeight="medium"
-                fontSize={{ xl: "5xl", sm: "4xl", base: "3xl" }}
-                textAlign={{ lg: "left", base: "center" }}
-              >
-                {data.text.subtitle}
-              </Heading>
+            <VStack
+              maxWidth="45rem"
+              alignItems="left"
+              mt="4rem"
+              mb="8rem"
+              mr={{ lg: "4rem", base: "0" }}
+              flex={1}
+            >
+              {headline && (
+                <Heading
+                  fontWeight="semibold"
+                  fontSize={{ xl: "6xl", sm: "5xl", base: "4xl" }}
+                  textTransform="uppercase"
+                  color="primary"
+                  textAlign={{ lg: "left", base: "center" }}
+                >
+                  {headline}
+                </Heading>
+              )}
+              {subtitle && (
+                <Heading
+                  fontWeight="medium"
+                  fontSize={{ xl: "5xl", sm: "4xl", base: "3xl" }}
+                  textAlign={{ lg: "left", base: "center" }}
+                >
+                  {subtitle}
+                </Heading>
+              )}
             </VStack>
             <Box
               mt="auto"
@@ -117,13 +127,15 @@ const HomeHeader: FC = () => {
           </Flex>
         </Flex>
       </Box>
-      <Flex bg="primary" py="2rem" justifyContent="center" px="2rem">
-        <Heading color="white" fontWeight="medium" textAlign="center">
-          {data.headline.headline}
-        </Heading>
-      </Flex>
+      {header && (
+        <Flex bg="primary" py="2rem" justifyContent="center" px="2rem">
+          <Heading color="white" fontWeight="medium" textAlign="center">
+            {header}
+          </Heading>
+        </Flex>
+      )}
     </Box>
   );
 };
 
-export default HomeHeader;
+export default Header;

@@ -1,41 +1,29 @@
 import React, { FC } from "react";
-import Header from "../components/Header";
-import LandingSection from "../components/LandingSection";
 import { graphql } from "gatsby";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import SEO from "../components/SEO";
 import Contact from "../components/Contact";
-import PracticeAreas from "../components/PracticeAreas";
-import Badges from "../components/Badges";
+import Navbar from "../components/Navbar";
+import RichText from "../components/RichText";
+import Header from "../components/Header";
+import LandingSection from "../components/LandingSection";
 
-type IndexProps = {
+type PageProps = {
   data: any;
 };
 
-const Index: FC<IndexProps> = ({ data }) => {
+const Page: FC<PageProps> = ({ data }) => {
   return (
     <Box>
-      <SEO />
+      <SEO title="Betsy Rader Consulting" />
       <Header
         headline={data.text.headline}
         subtitle={data.text.subtitle}
         header={data.text.header}
       />
-      <LandingSection
-        key={data.sections.nodes[0].id}
-        title={data.sections.nodes[0].title}
-        overline={data.sections.nodes[0].overline}
-        direction={data.sections.nodes[0].direction}
-        backgroundColor={data.sections.nodes[0].backgroundColor}
-        backgroundImage={data.sections.nodes[0].background.gatsbyImageData}
-        content={JSON.parse(data.sections.nodes[0].content.raw)}
-      />
-      <Badges />
-      <PracticeAreas />
       <Box>
         {data.sections.nodes
-          .filter((section: any) => !section.primary)
           .map((section: any) => (
             <LandingSection
               key={section.id}
@@ -55,10 +43,10 @@ const Index: FC<IndexProps> = ({ data }) => {
 };
 
 export const pageQuery = graphql`
-  query LandingPage {
+  query Consulting {
     sections: allContentfulLandingSection(
       sort: { fields: order, order: ASC }
-      filter: { page: { eq: "/" } }
+      filter: { page: { eq: "/consulting" } }
     ) {
       nodes {
         id
@@ -75,7 +63,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    text: contentfulPageHeader(page: { eq: "/" }) {
+    text: contentfulPageHeader(page: { eq: "/consulting" }) {
       headline
       subtitle
       header
@@ -83,4 +71,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default Index;
+export default Page;

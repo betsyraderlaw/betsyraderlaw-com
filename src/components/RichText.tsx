@@ -28,7 +28,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h1"
           mt="7"
           fontWeight="semibold"
-          fontSize="4xl"
+          fontSize="5xl"
           color="primary"
         >
           {children}
@@ -39,7 +39,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h2"
           mt="6"
           fontWeight="semibold"
-          fontSize="3xl"
+          fontSize="4xl"
           color="primary"
         >
           {children}
@@ -50,7 +50,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h3"
           mt="5"
           fontWeight="semibold"
-          fontSize="2xl"
+          fontSize="3xl"
           color="primary"
         >
           {children}
@@ -61,7 +61,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h4"
           mt="4"
           fontWeight="semibold"
-          fontSize="xl"
+          fontSize="2xl"
           color="primary"
         >
           {children}
@@ -72,7 +72,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h5"
           mt="3"
           fontWeight="semibold"
-          fontSize="lg"
+          fontSize="xl"
           color="primary"
         >
           {children}
@@ -83,14 +83,14 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
           as="h6"
           mt="2"
           fontWeight="semibold"
-          fontSize="md"
+          fontSize="lg"
           color="primary"
         >
           {children}
         </Heading>
       ),
       [BLOCKS.PARAGRAPH]: (_, children) => (
-        <Text as="p" mt="2" fontWeight="medium">
+        <Text as="p" mt="2" fontSize="lg" fontWeight="medium">
           {children}
         </Text>
       ),

@@ -49,8 +49,9 @@ const LandingSection: FC<LandingSectionProps> = ({
         lg: direction === "left" ? "row" : "row-reverse",
         base: "column",
       }}
+      bg={direction === "right" ? 'background' : 'white'}
     >
-      <Flex position="relative" maxHeight="24rem" minHeight="18rem" flex={1}>
+      <Flex position="relative" maxHeight="35rem" minHeight="18rem" width={{ lg: "50%", base: "100%" }}>
         <ImageTint tintColor={backgroundColor}>
           <GatsbyImage alt={title} style={{ width: '100%', height: '100%' }} image={backgroundImage} />
         </ImageTint>
@@ -85,7 +86,6 @@ const LandingSection: FC<LandingSectionProps> = ({
         </Flex>
       </Flex>
       <Flex
-        flex={1}
         alignItems="center"
         px={{ lg: "4rem", base: "2rem" }}
         py="2rem"

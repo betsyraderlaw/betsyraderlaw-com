@@ -67,13 +67,6 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
           url
         }
       }
-      pages: allContentfulPage {
-        nodes {
-          id
-          title
-          path
-        }
-      }
     }
   `);
   return (
@@ -109,16 +102,19 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
             <NavbarLink to="/" display={{ md: "block", base: "none" }}>
               Home
             </NavbarLink>
-            {data.pages.nodes.map((page: any) => (
-              <NavbarLink
-                key={page.id}
-                to={`/${page.path}`}
-                display={{ md: "block", base: "none" }}
-              >
-                {page.title}
-              </NavbarLink>
-            ))}
-            <NavbarLink to="/contact" display={{ md: "block", base: "none" }}>
+            <NavbarLink to="/about" display={{ md: "block", base: "none" }}>
+              About
+            </NavbarLink>
+            <NavbarLink
+              to="/consulting"
+              display={{ md: "block", base: "none" }}
+            >
+              Consulting
+            </NavbarLink>
+            <NavbarLink to="/training" display={{ md: "block", base: "none" }}>
+              Training
+            </NavbarLink>
+            <NavbarLink to="#contact" display={{ md: "block", base: "none" }}>
               Contact
             </NavbarLink>
           </HStack>
@@ -142,12 +138,10 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
             </Box>
             <VStack spacing="2rem">
               <NavbarLink to="/">Home</NavbarLink>
-              {data.pages.nodes.map((page: any) => (
-                <NavbarLink key={page.id} to={`/${page.path}`}>
-                  {page.title}
-                </NavbarLink>
-              ))}
-              <NavbarLink to="/contact">Contact</NavbarLink>
+              <NavbarLink to="/about">About</NavbarLink>
+              <NavbarLink to="/consulting">Consulting</NavbarLink>
+              <NavbarLink to="/training">Training</NavbarLink>
+              <NavbarLink to="#contact">Contact</NavbarLink>
             </VStack>
             <Button
               variant="ghost"

@@ -125,7 +125,7 @@ const RichText: FC<RichTextProps> = ({ content, references, ...props }) => {
         return null;
       },
     },
-    renderText: (text) => <Box as="span">{text}</Box>,
+    renderText: (text) => <Box as="span">{text}</Box>
   };
 
   return (

@@ -52,6 +52,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-anchor-links",
     "gatsby-plugin-react-helmet",
     {
       resolve: "@chakra-ui/gatsby-plugin",

@@ -17,37 +17,42 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { ChevronUpIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 export type NavbarLinkProps = HeadingProps & {
-  to: string;
+  to?: string;
 };
 
-export const NavbarLink: FC<NavbarLinkProps> = ({ children, to, ...props }) => (
-  <Heading
-    as={Link}
-    to={to}
-    fontSize="lg"
-    fontWeight="medium"
-    height="8"
-    flexShrink={0}
-    css={css`
-      &[aria-current="page"] {
-        &:after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 2px;
-          margin-top: 0.25rem;
-          background-color: var(--chakra-colors-primary);
-          border-radius: 10px;
+export const NavbarLink: FC<NavbarLinkProps> = ({ children, to, ...props }) => {
+  return (
+    <Heading
+      fontSize="lg"
+      fontWeight="medium"
+      height="8"
+      flexShrink={0}
+      css={css`
+        &[aria-current="page"] {
+          &:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            margin-top: 0.25rem;
+            background-color: var(--chakra-colors-primary);
+            border-radius: 10px;
+          }
         }
-      }
-    `}
-    {...props}
-  >
-    {children}
-  </Heading>
-);
+      `}
+      {...props}
+      {...(to && {
+        as: Link,
+        to
+      })}
+    >
+      {children}
+    </Heading>
+  );
+};
 
 export type NavbarProps = FlexProps;
 
@@ -114,8 +119,8 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
             <NavbarLink to="/training" display={{ md: "block", base: "none" }}>
               Training
             </NavbarLink>
-            <NavbarLink to="#contact" display={{ md: "block", base: "none" }}>
-              Contact
+            <NavbarLink display={{ md: "block", base: "none" }}>
+              <AnchorLink to="/#contact">Contact</AnchorLink>
             </NavbarLink>
           </HStack>
           <IconButton
@@ -141,7 +146,9 @@ const Navbar: FC<NavbarProps> = ({ children, ...props }) => {
               <NavbarLink to="/about">About</NavbarLink>
               <NavbarLink to="/consulting">Consulting</NavbarLink>
               <NavbarLink to="/training">Training</NavbarLink>
-              <NavbarLink to="#contact">Contact</NavbarLink>
+              <AnchorLink to="/#contact" onAnchorLinkClick={onClose}>
+                <NavbarLink>Contact</NavbarLink>
+              </AnchorLink>
             </VStack>
             <Button
               variant="ghost"

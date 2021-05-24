@@ -22,7 +22,7 @@ const ImageTint = styled(Box, {
     bottom: 0,
     right: 0,
     background: `var(--chakra-colors-${tintColor})`,
-    opacity: 0.8,
+    opacity: 0.7,
   },
 }));
 

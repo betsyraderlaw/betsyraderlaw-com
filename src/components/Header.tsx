@@ -83,11 +83,11 @@ const Header: FC<HeaderProps> = ({ header, subtitle, headline }) => {
         >
           <Flex maxW="64rem" justifyContent="center" alignItems="bottom">
             <VStack
-              maxWidth="45rem"
+              maxWidth="30rem"
               alignItems="left"
+              mr={{ lg: '12rem', base: '0' }}
               mt="4rem"
               mb="8rem"
-              mr={{ lg: "4rem", base: "0" }}
               flex={1}
             >
               {headline && (
@@ -113,7 +113,6 @@ const Header: FC<HeaderProps> = ({ header, subtitle, headline }) => {
             </VStack>
             <Box
               mt="auto"
-              ml="auto"
               height="400px"
               width="300px"
               flexShrink={0}
